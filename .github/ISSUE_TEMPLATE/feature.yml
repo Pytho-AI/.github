@@ -14,6 +14,20 @@ body:
 
         If you can't answer these clearly, go back to discovery.
 
+  - type: checkboxes
+    id: product
+    attributes:
+      label: "Product / Domain"
+      description: "Which product(s) does this feature touch? Select all that apply."
+      options:
+        - label: "Atlas — geospatial, maps, terrain, symbology"
+        - label: "Anvil — planning workflows (MDMP, TLP, MCPP, JOPP, ICS, ADM, RDSP)"
+        - label: "Crucible — wargaming, COA generation, scenario engine"
+        - label: "Tome — doctrine, RAG, knowledge base, vector search"
+        - label: "Other — platform, auth, infra, cross-cutting"
+    validations:
+      required: true
+
   - type: textarea
     id: problem
     attributes:
@@ -133,11 +147,10 @@ body:
   - type: textarea
     id: service
     attributes:
-      label: "Product / Domain Alignment (if applicable)"
-      description: "Which Pytho services (Atlas/Anvil/Crucible/Tome)?"
+      label: "MDMP / Doctrine Alignment (if applicable)"
+      description: "Which MDMP steps does this affect? Any doctrine references (FM, JP, MCDP)?"
       placeholder: |
         **MDMP Steps affected:** Step 3 (Mission Analysis), Step 4 (COA Development)
-        **Services:** Helm → Tome (LLM) → Atlas (terrain validation) → Anvil (render)
         **Doctrine references:** FM 3-0 §X, JP 5-0 §Y
       value: "N/A"
 

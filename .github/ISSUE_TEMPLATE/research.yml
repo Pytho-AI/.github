@@ -14,6 +14,20 @@ body:
         - The answer is **not already known** (check CLAUDE.md, Drive docs, prior issues)
         - You have a **time-box** — if you can't answer it in that time, escalate
 
+  - type: checkboxes
+    id: product
+    attributes:
+      label: "Product / Domain"
+      description: "Which product(s) does this research inform? Select all that apply."
+      options:
+        - label: "Atlas — geospatial, maps, terrain, symbology"
+        - label: "Anvil — planning workflows (MDMP, TLP, MCPP, JOPP, ICS, ADM, RDSP)"
+        - label: "Crucible — wargaming, COA generation, scenario engine"
+        - label: "Tome — doctrine, RAG, knowledge base, vector search"
+        - label: "Other — platform, auth, infra, cross-cutting"
+    validations:
+      required: true
+
   - type: textarea
     id: question
     attributes:
@@ -98,11 +112,10 @@ body:
   - type: textarea
     id: mdmp
     attributes:
-      label: "Domain / Service Context (if applicable)"
+      label: "MDMP / Doctrine Context (if applicable)"
       placeholder: |
-        **Relevant services:** Atlas (GIS), Codex (LLM), Crucible (wargaming)
         **MDMP relevance:** [Which planning steps this affects]
-        **Doctrine references:** [FM / JP / JP / MCDP refs if applicable]
+        **Doctrine references:** [FM / JP / MCDP refs if applicable]
       value: "N/A"
 
   - type: dropdown

@@ -14,6 +14,20 @@ body:
         | SEV 3 | Feature degraded, workaround exists | Export produces wrong file name |
         | SEV 4 | Minor / cosmetic | Button label typo |
 
+  - type: checkboxes
+    id: product
+    attributes:
+      label: "Product / Domain"
+      description: "Which product(s) is the bug in? Select all that apply."
+      options:
+        - label: "Atlas — geospatial, maps, terrain, symbology"
+        - label: "Anvil — planning workflows (MDMP, TLP, MCPP, JOPP, ICS, ADM, RDSP)"
+        - label: "Crucible — wargaming, COA generation, scenario engine"
+        - label: "Tome — doctrine, RAG, knowledge base, vector search"
+        - label: "Other — platform, auth, infra, cross-cutting"
+    validations:
+      required: true
+
   - type: dropdown
     id: severity
     attributes:

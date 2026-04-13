@@ -14,6 +14,20 @@ body:
         | Medium | Slows down team velocity or causes frequent bugs | No typed interfaces between services, duplicate business logic |
         | Low | Cosmetic / preference | Inconsistent naming, dead code, unused deps |
 
+  - type: checkboxes
+    id: product
+    attributes:
+      label: "Product / Domain"
+      description: "Which product(s) does this debt live in? Select all that apply."
+      options:
+        - label: "Atlas — geospatial, maps, terrain, symbology"
+        - label: "Anvil — planning workflows (MDMP, TLP, MCPP, JOPP, ICS, ADM, RDSP)"
+        - label: "Crucible — wargaming, COA generation, scenario engine"
+        - label: "Tome — doctrine, RAG, knowledge base, vector search"
+        - label: "Other — platform, auth, infra, cross-cutting"
+    validations:
+      required: true
+
   - type: textarea
     id: description
     attributes:
