@@ -131,13 +131,13 @@ body:
       required: true
 
   - type: textarea
-    id: mdmp
+    id: service
     attributes:
-      label: "MDMP / Domain Alignment (if applicable)"
-      description: "Which MDMP steps does this affect? Which Pytho services (Helm/Atlas/Crucible/Codex/Muster)?"
+      label: "Product / Domain Alignment (if applicable)"
+      description: "Which Pytho services (Atlas/Anvil/Crucible/Tome)?"
       placeholder: |
         **MDMP Steps affected:** Step 3 (Mission Analysis), Step 4 (COA Development)
-        **Services:** Helm → Codex (LLM) → Atlas (terrain validation) → Helm (render)
+        **Services:** Helm → Tome (LLM) → Atlas (terrain validation) → Anvil (render)
         **Doctrine references:** FM 3-0 §X, JP 5-0 §Y
       value: "N/A"
 
