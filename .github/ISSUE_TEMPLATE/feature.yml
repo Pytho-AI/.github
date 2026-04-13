@@ -1,0 +1,163 @@
+name: "Feature Request"
+description: "Propose a new feature or enhancement. Follows the Pytho /spec framework."
+title: "[Feature] "
+labels: ["feature", "needs-spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Before you write this spec, answer these first:
+        - What problem are we solving? (symptom vs root cause)
+        - Who has the problem? (specific user role + context)
+        - What happens if we don't build this?
+        - How do we measure success?
+
+        If you can't answer these clearly, go back to discovery.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem Statement"
+      description: "What is broken or missing? Be specific. Bad: 'Users want X'. Good: 'Battalion S-3 needs to brief COAs in 5 min; currently takes 30 min because...'"
+      placeholder: |
+        **Who has it:** [role + context, e.g. "S-3 during exercise planning, under time pressure"]
+        **What breaks today:** [specific pain, with any data you have]
+        **Impact if unbuilt:** [what happens if we ship nothing]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope-mode
+    attributes:
+      label: "Scope Mode"
+      description: "Which gstack mode applies? See Pytho SDLC /spec for definitions."
+      options:
+        - "SCOPE EXPANSION — Dream big, 10x features"
+        - "HOLD SCOPE — Nail exactly this, fixed scope"
+        - "SCOPE REDUCTION — MVP only, strip nice-to-haves"
+    validations:
+      required: true
+
+  - type: textarea
+    id: star-thinking
+    attributes:
+      label: "10-Star Thinking"
+      description: "What's the 10-star (unlimited) version? Where does v1 ship?"
+      placeholder: |
+        1-star (minimum viable): ...
+        3-star (v1 target): ...
+        5-star (Phase 2): ...
+        10-star (dream state): ...
+
+        **v1 ships at: ★★★ (3-star)**
+    validations:
+      required: true
+
+  - type: textarea
+    id: non-goals
+    attributes:
+      label: "Non-Goals (MANDATORY)"
+      description: "What are we explicitly NOT building in v1? Be specific to prevent scope creep."
+      placeholder: |
+        - [ ] Real-time collaboration (Phase 2 — requires CRDT)
+        - [ ] Mobile support (web only for v1)
+        - [ ] Integration with AFATDS (Phase 3)
+        - [ ] 3D terrain visualization (static 2D only)
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: "Requirements (MoSCoW)"
+      description: "Must Have ≤ 30% of scope. Should Have ≤ 50%. Could Have ≤ 20%."
+      placeholder: |
+        ### Must Have (ship gate — don't ship without these)
+        - [ ] ...
+
+        ### Should Have (high value, v1 preferred)
+        - [ ] ...
+
+        ### Could Have (nice-to-have, v1.1 OK)
+        - [ ] ...
+
+        ### Won't Have (explicitly deferred to backlog)
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-stories
+    attributes:
+      label: "User Stories (Given / When / Then)"
+      description: "Write at least the primary happy-path story plus one edge case."
+      placeholder: |
+        **Story 1: [action]**
+        As a: [role]
+        I want to: [action]
+        So that: [outcome]
+
+        Given: [precondition]
+        When: [action]
+        Then: [expected result]
+          AND: [additional assertion]
+
+        Edge case: [scenario]
+        Given: ...
+        When: ...
+        Then: ...
+
+        Acceptance Criteria:
+        - [ ] p99 latency < Xs
+        - [ ] Error message shown if [condition]
+        - [ ] Keyboard navigable (WCAG AA)
+    validations:
+      required: true
+
+  - type: textarea
+    id: success-metrics
+    attributes:
+      label: "Success Metrics"
+      placeholder: |
+        **Leading (operational — measures effort/quality):**
+        - Adoption: % of users using feature within 30 days
+        - Quality: [specific quality signal]
+        - Performance: p50/p99 latency target
+
+        **Lagging (business — measures outcome):**
+        - [Time saved / efficiency gained]
+        - [User satisfaction / NPS impact]
+    validations:
+      required: true
+
+  - type: textarea
+    id: mdmp
+    attributes:
+      label: "MDMP / Domain Alignment (if applicable)"
+      description: "Which MDMP steps does this affect? Which Pytho services (Helm/Atlas/Crucible/Codex/Muster)?"
+      placeholder: |
+        **MDMP Steps affected:** Step 3 (Mission Analysis), Step 4 (COA Development)
+        **Services:** Helm → Codex (LLM) → Atlas (terrain validation) → Helm (render)
+        **Doctrine references:** FM 3-0 §X, JP 5-0 §Y
+      value: "N/A"
+
+  - type: textarea
+    id: parking-lot
+    attributes:
+      label: "Parking Lot (deferred ideas that came up)"
+      placeholder: |
+        - Idea: Auto-save every 30s → Why deferred: session state complexity; revisit Phase 2
+        - Idea: ...
+      value: "None yet."
+
+  - type: dropdown
+    id: moscow-priority
+    attributes:
+      label: "Sprint MoSCoW Priority"
+      options:
+        - "Must — blocking without this"
+        - "Should — high value, same sprint"
+        - "Could — if capacity allows"
+        - "Won't — backlog"
+    validations:
+      required: true

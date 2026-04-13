@@ -1,0 +1,137 @@
+name: "Tech Debt"
+description: "Track known technical debt — code that works but needs to be improved before it becomes a liability."
+title: "[Tech Debt] "
+labels: ["tech-debt"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Tech debt triage guide
+        | Priority | Description | Examples at Pytho |
+        |----------|-------------|-------------------|
+        | Critical | Active security risk or blocks scaling | No JWT validation on /api endpoints, CORS wildcards in prod |
+        | High | Will cause outages or major rework within 1 quarter | No test coverage on auth, SQLite in prod |
+        | Medium | Slows down team velocity or causes frequent bugs | No typed interfaces between services, duplicate business logic |
+        | Low | Cosmetic / preference | Inconsistent naming, dead code, unused deps |
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "What is the debt?"
+      description: "Describe the current state honestly. No judgment — debt is normal."
+      placeholder: |
+        **Current state:** [What exists today and why it's problematic]
+        **Why it was incurred:** [Deadline pressure / MVP shortcut / changing requirements / lack of knowledge at the time]
+        **How long has it existed:** [Rough estimate]
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: "Where does it live?"
+      description: "Be specific — file paths, service names, API endpoints."
+      placeholder: |
+        - `pytho-app/app/api/routes/*.py` — no auth middleware
+        - `pytho-vite/src/components/Map/` — no error boundaries
+        - Service: `coa-engine` — synchronous blocking calls on main thread
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Impact & Risk if Unaddressed"
+      description: "What breaks or gets worse if we leave this alone? Tie to real consequences."
+      placeholder: |
+        **Security risk:** [e.g. unauthenticated API allows data exfil]
+        **Reliability risk:** [e.g. no error handling → silent failures in prod]
+        **Velocity cost:** [e.g. every new feature requires duplicating this logic]
+        **Scaling risk:** [e.g. SQLite breaks at >10 concurrent users]
+        **Debt trajectory:** Is this getting worse over time, or stable?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Priority"
+      options:
+        - "Critical — active security risk or blocks scaling now"
+        - "High — will cause outage or major rework within 1 quarter"
+        - "Medium — slows team velocity or causes frequent bugs"
+        - "Low — cosmetic / preference"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-fix
+    attributes:
+      label: "Proposed Fix"
+      description: "What does the clean solution look like? Don't over-engineer — the simplest correct thing."
+      placeholder: |
+        **Target state:** [What the code should look like after the fix]
+        **Approach:** [Migration path — can we do this incrementally, or does it require a big bang?]
+        **Non-goals:** [What we're NOT changing as part of this fix]
+    validations:
+      required: true
+
+  - type: textarea
+    id: effort
+    attributes:
+      label: "Effort Estimate"
+      placeholder: |
+        **T-shirt size:** XS / S / M / L / XL
+        **Engineer days (rough):** ~X days
+        **Can it be done incrementally:** Yes / No — [reason]
+        **Requires downtime:** Yes / No
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria (Given / When / Then)"
+      description: "How do we know this is fixed?"
+      placeholder: |
+        - [ ] Given [condition], when [action], then [result] — no regression
+        - [ ] All existing tests still pass
+        - [ ] New test(s) cover the fixed path
+        - [ ] No new Sentry errors from this module after deploy
+        - [ ] [Specific metric: e.g. 'p99 latency drops from 4s to <500ms']
+    validations:
+      required: true
+
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: "Trade-offs & Risks of Fixing"
+      description: "Sometimes fixing debt introduces new risk. Be honest."
+      placeholder: |
+        - Changing auth middleware touches every endpoint — regression risk is high → mitigate with full E2E suite before deploy
+        - Migrating from SQLite → Postgres requires data migration — plan for downtime window
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: "Related Issues / PRs / Docs"
+      placeholder: |
+        - Introduced in PR #XX
+        - Related to issue #YY
+        - CLAUDE.md: "Critical Quality Gaps" section
+        - Drive doc: [link]
+      value: "None"
+
+  - type: dropdown
+    id: moscow-priority
+    attributes:
+      label: "MoSCoW (Sprint Priority)"
+      options:
+        - "Must — fix this sprint (security / blocking)"
+        - "Should — fix this sprint if capacity"
+        - "Could — next sprint"
+        - "Won't — tracked but deferred"
+    validations:
+      required: true

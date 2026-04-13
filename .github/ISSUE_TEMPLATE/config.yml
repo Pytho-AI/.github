@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Pytho Sprint Board
+    url: https://github.com/orgs/Pytho-AI/projects/2
+    about: View and manage the current sprint in the project board.
+  - name: Pytho SDLC Engine (/spec, /plan, /architect)
+    url: https://github.com/Pytho-AI/internal-tools/tree/main/pytho-sdlc-engine/skills
+    about: Reference the SDLC skills for deeper planning and spec writing.

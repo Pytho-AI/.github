@@ -1,0 +1,118 @@
+name: "Research Spike"
+description: "Time-boxed investigation to answer a specific question before committing to a design or build."
+title: "[Research] "
+labels: ["research", "spike"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## What is a research spike?
+        A spike is a **time-boxed investigation** — not a build task. The output is a decision, a recommendation, or a proof-of-concept, not production code.
+
+        Before opening this issue, confirm:
+        - There is a **specific question** that blocks a design or build decision
+        - The answer is **not already known** (check CLAUDE.md, Drive docs, prior issues)
+        - You have a **time-box** — if you can't answer it in that time, escalate
+
+  - type: textarea
+    id: question
+    attributes:
+      label: "Research Question"
+      description: "One specific, answerable question. Bad: 'Investigate GIS options'. Good: 'Can NDU's existing GIS tooling serve our MVT tile format at <200ms p99?'"
+      placeholder: "Can [X] do [Y] within [constraint Z]?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "Context & Motivation"
+      description: "Why does this question matter now? What decision does it unlock?"
+      placeholder: |
+        **Blocks:** [Feature / issue / architectural decision this unblocks]
+        **Why now:** [Why this can't wait or be assumed]
+        **What we know already:** [Prior art, assumptions, constraints]
+    validations:
+      required: true
+
+  - type: textarea
+    id: success-criteria
+    attributes:
+      label: "Success Criteria"
+      description: "What does a good answer look like? What would let us close this spike?"
+      placeholder: |
+        - [ ] We have a clear yes/no recommendation with evidence
+        - [ ] We have a working PoC that demonstrates [X] at scale [Y]
+        - [ ] We have a comparison of at least 2 options on [dimensions: cost, latency, ops burden]
+        - [ ] We know what we'd need to build / buy / integrate
+    validations:
+      required: true
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: "Approach / Methodology"
+      placeholder: |
+        1. Review existing docs / prior art (Day 1)
+        2. Set up PoC environment (Day 1–2)
+        3. Run benchmark: [specific test]
+        4. Interview [SME / vendor / user] if needed
+        5. Write up findings with recommendation
+    validations:
+      required: true
+
+  - type: input
+    id: timebox
+    attributes:
+      label: "Time-Box"
+      description: "Hard cap. If you haven't answered the question by this date, escalate."
+      placeholder: "e.g. 2 days (Apr 15), 1 sprint, 4 hours"
+    validations:
+      required: true
+
+  - type: textarea
+    id: unknowns
+    attributes:
+      label: "Known Unknowns"
+      description: "What might make this harder than expected?"
+      placeholder: |
+        - We don't have access to NDU's GIS stack yet (need intro from Fitz)
+        - Vendor pricing not public — may need NDA
+        - PoC may require classified data to be meaningful
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: "Deliverable"
+      description: "What artifact closes this issue?"
+      placeholder: |
+        - [ ] Written recommendation posted as issue comment (link to Drive doc if long)
+        - [ ] PoC repo / branch with README
+        - [ ] Decision recorded in CLAUDE.md or relevant ADR
+        - [ ] Follow-on issue(s) created if we proceed
+    validations:
+      required: true
+
+  - type: textarea
+    id: mdmp
+    attributes:
+      label: "Domain / Service Context (if applicable)"
+      placeholder: |
+        **Relevant services:** Atlas (GIS), Codex (LLM), Crucible (wargaming)
+        **MDMP relevance:** [Which planning steps this affects]
+        **Doctrine references:** [FM / JP / JP / MCDP refs if applicable]
+      value: "N/A"
+
+  - type: dropdown
+    id: moscow-priority
+    attributes:
+      label: "MoSCoW Priority"
+      options:
+        - "Must — blocks current sprint work"
+        - "Should — high value, same sprint"
+        - "Could — if capacity allows"
+        - "Won't — backlog"
+    validations:
+      required: true

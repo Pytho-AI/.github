@@ -1,0 +1,141 @@
+name: "Bug Report"
+description: "Something is broken. Include reproduction steps, screenshot, and HAR file if network-related."
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Quick severity guide
+        | SEV | Description | Example |
+        |-----|-------------|---------|
+        | SEV 1 | Production down / data loss | Auth broken, map won't load for all users |
+        | SEV 2 | Major feature broken, no workaround | COA generation fails every time |
+        | SEV 3 | Feature degraded, workaround exists | Export produces wrong file name |
+        | SEV 4 | Minor / cosmetic | Button label typo |
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Severity"
+      options:
+        - "SEV 1 — Production down / data loss"
+        - "SEV 2 — Major feature broken, no workaround"
+        - "SEV 3 — Feature degraded, workaround exists"
+        - "SEV 4 — Minor / cosmetic"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: "What happened?"
+      description: "One clear sentence. Bad: 'It broke'. Good: 'Clicking Generate COA shows a blank screen instead of the COA map.'"
+      placeholder: "Clicking [X] causes [Y] instead of [expected Z]"
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: "Steps to Reproduce"
+      placeholder: |
+        1. Go to [page / route]
+        2. Log in as [role, e.g. facilitator / participant]
+        3. Click / enter / navigate to [X]
+        4. Observe [Y]
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected vs Actual Behavior"
+      placeholder: |
+        **Expected:** [What should happen]
+        **Actual:** [What actually happens]
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## Screenshot (required for UI bugs)
+
+        **How to attach a screenshot:**
+        1. **Mac:** `Cmd + Shift + 4` → drag to select area → file saved to Desktop
+        2. **Mac full screen:** `Cmd + Shift + 3`
+        3. **Windows:** `Win + Shift + S` → Snipping Tool
+        4. Drag the file directly into this text box, or paste with `Cmd/Ctrl + V`
+
+        > Tip: If the bug involves a tooltip, modal, or hover state that disappears when you switch windows, use `Cmd + Shift + 4` immediately after triggering it.
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: "Screenshot"
+      description: "Drag and drop your screenshot here, or paste it (Cmd/Ctrl+V). Mark up the problem area with a red box or arrow if helpful."
+      placeholder: "[ drag screenshot here ]"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## HAR File (required for network / API bugs)
+
+        A HAR (HTTP Archive) file captures all network requests — attach one if the bug involves:
+        - API calls returning wrong data or errors
+        - Slow load times or timeouts
+        - WebSocket disconnections
+        - Auth / session failures
+
+        **How to export a HAR from Chrome:**
+        1. Open Chrome DevTools (`F12` or `Cmd + Option + I`)
+        2. Click the **Network** tab
+        3. Check **Preserve log** (checkbox near top)
+        4. Reproduce the bug
+        5. Right-click anywhere in the network request list → **Save all as HAR with content**
+        6. Attach the `.har` file below (drag into this box)
+
+        > ⚠️ HAR files contain cookies and auth tokens. Only share in private GitHub issues or strip sensitive headers first using [HAR Sanitizer](https://HAR-sanitizer.safeframe.googlesyndication.com) before attaching.
+
+  - type: textarea
+    id: har
+    attributes:
+      label: "HAR File (network bugs only)"
+      description: "Drag and drop your .har file here, or paste a link to it."
+      placeholder: "[ drag .har file here — only if this is a network/API bug ]"
+      value: "N/A — not a network bug"
+
+  - type: input
+    id: environment
+    attributes:
+      label: "Environment"
+      placeholder: "e.g. prod / dow-test / local | Chrome 124 | macOS 14 | pytho-vite v2.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: user-role
+    attributes:
+      label: "Affected User Role"
+      placeholder: "e.g. Facilitator, Participant, Admin — or 'all users'"
+    validations:
+      required: true
+
+  - type: textarea
+    id: console-errors
+    attributes:
+      label: "Console Errors (if any)"
+      description: "Open DevTools → Console tab → copy any red errors here."
+      render: shell
+      placeholder: "Uncaught TypeError: Cannot read properties of undefined..."
+      value: "None"
+
+  - type: textarea
+    id: possible-cause
+    attributes:
+      label: "Possible Cause / Notes (optional)"
+      placeholder: "Started after PR #XX, only happens when logged in as facilitator, etc."
+      value: "Unknown"
