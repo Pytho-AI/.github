@@ -7,7 +7,7 @@ body:
     id: mission-owner
     attributes:
       label: "Mission Owner"
-      description: "Who owns this feature end-to-end?"
+      description: "Mission Team Owner?"
       placeholder: "e.g. Jane Doe"
     validations:
       required: true
